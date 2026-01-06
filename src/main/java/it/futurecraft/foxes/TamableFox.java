@@ -7,7 +7,6 @@ import me.gamercoder215.mobchip.EntityBrain;
 import me.gamercoder215.mobchip.ai.EntityAI;
 import me.gamercoder215.mobchip.ai.controller.EntityController;
 import me.gamercoder215.mobchip.ai.goal.WrappedPathfinder;
-import me.gamercoder215.mobchip.ai.goal.target.PathfinderNearestAttackableTarget;
 import me.gamercoder215.mobchip.bukkit.BukkitBrain;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -55,6 +54,7 @@ public class TamableFox {
         this.targetSelector = brain.getTargetAI();
 
         setTame(isTame());
+        plugin.getLogger().info("is tamed" + isTame());
     }
 
     public static boolean isFox(@NotNull Entity m) {
@@ -111,15 +111,8 @@ public class TamableFox {
 
     public void setTame(boolean t) {
         container.set(plugin.FOX_TAMED_KEY, PersistentDataType.BOOLEAN, t);
-
-        plugin.getLogger().info("Changing tame to " + t);
-
-        if (t) {
-            this.applyTamingSideEffect();
-            this.removeNonTameGoals();
-        } else {
-            this.removeTamingSideEffect();
-        }
+        this.removeNonTameGoals(t);
+        this.applyTamingSideEffect(t);
     }
 
     public boolean isOrderedToSit() {
@@ -132,39 +125,22 @@ public class TamableFox {
         sit.ifPresent(f -> f.setOrderedToSit(s));
     }
 
-    private void applyTamingSideEffect() {
+    private void applyTamingSideEffect(boolean s) {
         AttributeInstance health = fox.getAttribute(Attribute.MAX_HEALTH);
-        AttributeInstance attack = fox.getAttribute(Attribute.ATTACK_DAMAGE);
 
-        assert health != null && attack != null;
-
-        health.setBaseValue(health.getDefaultValue() * 2);
-        attack.setBaseValue(attack.getDefaultValue() + 1);
-
+        assert health != null;
+        health.setBaseValue(health.getDefaultValue() * 4);
         fox.setHealth(health.getValue());
     }
 
-    private void removeTamingSideEffect() {
-        AttributeInstance health = fox.getAttribute(Attribute.MAX_HEALTH);
-        AttributeInstance attack = fox.getAttribute(Attribute.ATTACK_DAMAGE);
-
-        assert health != null && attack != null;
-
-        health.setBaseValue(health.getDefaultValue());
-        attack.setBaseValue(attack.getDefaultValue());
-
-        fox.setHealth(health.getValue());
-    }
-
-    private void removeNonTameGoals() {
-        if (!isTame()) return;
+    private void removeNonTameGoals(boolean s) {
+        if (!s) return;
 
         plugin.getLogger().info("Removing non-taming goals from fox...");
 
         for (WrappedPathfinder wp : targetSelector) {
-            if (wp.getPathfinder() instanceof PathfinderNearestAttackableTarget<?> pf) {
-                plugin.getLogger().info("Found: " + pf.getInternalName());
-            }
+            plugin.getLogger().info("Removing " + wp.getPathfinder().getInternalName());
+            targetSelector.remove(wp.getPathfinder());
         }
     }
 

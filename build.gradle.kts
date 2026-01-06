@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("com.gradleup.shadow") version "9.3.0"
-    // id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
+    id("xyz.jpenilla.run-paper") version "3.0.2"
 }
 
 group = "it.futurecraft.foxes"
@@ -27,7 +27,25 @@ tasks.shadowJar {
     archiveVersion.set(rootProject.version.toString())
     archiveClassifier.set("")
 
-//    manifest {
-//        attributes["paperweight-mappings-namespace"] = "spigot"
-//    }
+    manifest {
+        attributes["paperweight-mappings-namespace"] = "spigot"
+    }
 }
+
+tasks {
+    runServer {
+        // Configure the Minecraft version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        minecraftVersion("1.21.10")
+    }
+}
+
+tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {
+    javaLauncher = javaToolchains.launcherFor {
+        vendor = JvmVendorSpec.JETBRAINS
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    jvmArgs("-XX:+AllowEnhancedClassRedefinition")
+}
+
