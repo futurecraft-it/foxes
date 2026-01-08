@@ -1,5 +1,6 @@
 package it.futurecraft.foxes.entities;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,16 +89,24 @@ public interface Tamable {
     /**
      * Whether should try to teleport the tamable nearby the owner's location.
      */
-    boolean shouldTryToTeleportOwner();
+    boolean shouldTryTeleportToOwner();
 
     /**
      * Tries to teleport the tamable nearby the owner's location.
      */
-    void tryToTeleportOwner();
+    void tryToTeleportToOwner();
 
     /**
      * Whether the tamable can move to the owner's location.
      * @return {@code true} if the tamable can move there, {@code false} otherwise.
      */
     boolean canMoveToOwner();
+
+    /**
+     * Whether the mob wants to attack the entity.
+     * @param target The target to attack.
+     * @param owner The owner of the tamable.
+     * @return {@code true} if the mob wants to attack the entity, {@code false} otherwise.
+     */
+    boolean wantsToAttack(@NotNull LivingEntity target, @NotNull LivingEntity owner);
 }

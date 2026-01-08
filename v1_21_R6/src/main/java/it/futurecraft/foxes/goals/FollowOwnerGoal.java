@@ -88,7 +88,7 @@ public class FollowOwnerGoal extends Goal implements SpeedModifier{
     public void tick() {
         Tamable t = (Tamable) entity;
 
-        boolean teleport = t.shouldTryToTeleportOwner();
+        boolean teleport = t.shouldTryTeleportToOwner();
         if (!teleport && entity.distanceToSqr(owner) <= 256.0D) {
             entity.getLookControl().setLookAt(owner, 10F, (float) entity.getMaxHeadXRot());
         }
@@ -97,7 +97,7 @@ public class FollowOwnerGoal extends Goal implements SpeedModifier{
             timeToRecalcPath = adjustedTickDelay(10);
 
             if (teleport) {
-                t.tryToTeleportOwner();
+                t.tryToTeleportToOwner();
             } else {
                 navigation.moveTo(owner, speedModifier);
             }

@@ -28,6 +28,7 @@ import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -140,13 +141,13 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
     }
 
     @Override
-    public boolean shouldTryToTeleportOwner() {
+    public boolean shouldTryTeleportToOwner() {
         CraftPlayer p = (CraftPlayer) owner().get();
         return owner().isPresent() && distanceToSqr(p.getHandle()) >= (double) 144.0F;
     }
 
     @Override
-    public void tryToTeleportOwner() {
+    public void tryToTeleportToOwner() {
         if (owner().isPresent()) return;
 
         Location loc = owner().get().getLocation();
@@ -205,5 +206,10 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
 
         return bs.is(Blocks.FURNACE) ? bs.getValue(FurnaceBlock.LIT) :
                 bs.is(BlockTags.BEDS, s -> s.getOptionalValue(BedBlock.PART).map(p -> p != BedPart.HEAD).orElse(true));
+    }
+
+    @Override
+    public boolean wantsToAttack(@NotNull LivingEntity target, @NotNull LivingEntity owner) {
+        return true;
     }
 }
