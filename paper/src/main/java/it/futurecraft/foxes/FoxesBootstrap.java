@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class FoxesBootstrap implements PluginBootstrap {
     @Override
     public void bootstrap(BootstrapContext context) {
-
     }
 
     @Override
