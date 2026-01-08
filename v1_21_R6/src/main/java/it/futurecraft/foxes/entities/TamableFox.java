@@ -1,5 +1,6 @@
 package it.futurecraft.foxes.entities;
 
+import it.futurecraft.foxes.goals.SitWhenOrderedToGoal;
 import it.futurecraft.foxes.utils.CustomPersistentDataType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -44,7 +45,9 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
 
     private static final Predicate<Entity> AVOID_PLAYER = (e) -> !e.isCrouching();
 
-    public final PersistentDataContainer pdc;
+    private final PersistentDataContainer pdc;
+
+    private boolean isOrderedToSit = false;
 
     public TamableFox(EntityType<? extends Fox> entitytype, Level world) {
         super(entitytype, world);
@@ -97,12 +100,12 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
 
     @Override
     public boolean orderedToSit() {
-        return false;
+        return isOrderedToSit;
     }
 
     @Override
     public void orderedToSit(boolean o) {
-
+        isOrderedToSit = o;
     }
 
     @Override
