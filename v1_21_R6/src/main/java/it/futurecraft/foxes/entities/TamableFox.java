@@ -4,23 +4,29 @@ import it.futurecraft.foxes.utils.CustomPersistentDataType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FurnaceBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -32,7 +38,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class TamableFox extends Fox implements Tamable {
+public class TamableFox extends Fox implements Tamable, ComfortSeeker {
     protected static final NamespacedKey KEY_OWNER = new NamespacedKey("foxes", "owner");
     protected static final NamespacedKey KEY_TAME = new NamespacedKey("foxes", "tame");
 
@@ -100,6 +106,26 @@ public class TamableFox extends Fox implements Tamable {
     }
 
     @Override
+    public boolean sit() {
+        return isSitting();
+    }
+
+    @Override
+    public void sit(boolean s) {
+        setSitting(s, true);
+    }
+
+    @Override
+    public boolean lie() {
+        return isSleeping();
+    }
+
+    @Override
+    public void lie(boolean l) {
+        setSleeping(l);
+    }
+
+    @Override
     public void tame(@NotNull Player p) {
         owner(p);
         tame(true);
@@ -162,5 +188,19 @@ public class TamableFox extends Fox implements Tamable {
 
         BlockPos bp1 = bp0.subtract(blockPosition());
         return level().noCollision(this, getBoundingBox().move(bp1));
+    }
+
+    @Override
+    public boolean canMoveToOwner() {
+        return false;
+    }
+
+    @Override
+    public boolean comfortable(BlockData bd) {
+        CraftBlockData cbd = (CraftBlockData) bd;
+        BlockState bs = cbd.getState();
+
+        return bs.is(Blocks.FURNACE) ? bs.getValue(FurnaceBlock.LIT) :
+                bs.is(BlockTags.BEDS, s -> s.getOptionalValue(BedBlock.PART).map(p -> p != BedPart.HEAD).orElse(true));
     }
 }

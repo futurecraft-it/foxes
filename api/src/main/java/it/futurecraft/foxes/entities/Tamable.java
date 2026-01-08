@@ -49,6 +49,30 @@ public interface Tamable {
     void orderedToSit(boolean o);
 
     /**
+     * Whether the tamable is sitting or not.
+     * @return {@code true} if it's sitting, {@code false} otherwise.
+     */
+    boolean sit();
+
+    /**
+     * Sets whether the tamable has to sit.
+     * @param s The new sit state.
+     */
+    void sit(boolean s);
+
+    /**
+     * Whether the tamable is lying or not.
+     * @return {@code true} if it's lying, {@code false} otherwise.
+     */
+    boolean lie();
+
+    /**
+     * Sets whether the tamable has to lie.
+     * @param l The new lie state.
+     */
+    void lie(boolean l);
+
+    /**
      *
      * @param p The player's that's taming the tamable.
      */
@@ -70,4 +94,10 @@ public interface Tamable {
      * Tries to teleport the tamable nearby the owner's location.
      */
     void tryToTeleportOwner();
+
+    /**
+     * Whether the tamable can move to the owner's location.
+     * @return {@code true} if the tamable can move there, {@code false} otherwise.
+     */
+    boolean canMoveToOwner();
 }
