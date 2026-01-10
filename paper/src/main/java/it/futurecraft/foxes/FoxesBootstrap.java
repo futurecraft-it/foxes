@@ -12,6 +12,6 @@ public class FoxesBootstrap implements PluginBootstrap {
 
     @Override
     public JavaPlugin createPlugin(PluginProviderContext context) {
-        return new Foxes();
+        return new FoxesPlugin();
     }
 }
