@@ -74,7 +74,14 @@ public interface Tamable {
     void lie(boolean l);
 
     /**
-     *
+     * Checks whether the player owns this tamable.
+     * @param p The player to check for.
+     * @return {@code true} if the player owns the tamable, {@code false} otherwise.
+     */
+    boolean ownedBy(@NotNull Player p);
+
+    /**
+     * Tame's this tamable for the player.
      * @param p The player's that's taming the tamable.
      */
     void tame(@NotNull Player p);
