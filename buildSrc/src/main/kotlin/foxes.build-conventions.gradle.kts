@@ -14,6 +14,10 @@ tasks.jar {
 }
 
 tasks.shadowJar {
+    archiveClassifier.set("")
+    archiveVersion.set(rootProject.version as String)
+    archiveBaseName.set(rootProject.name)
+
     mergeServiceFiles()
     // Needed for mergeServiceFiles to work properly in Shadow 9+
     filesMatching("META-INF/services/**") {

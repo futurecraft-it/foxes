@@ -2,8 +2,8 @@ plugins {
     `java-library`
 }
 
-group = "it.futurecraft.foxes"
-version = "1.0-SNAPSHOT"
+group = rootProject.group
+version = rootProject.version
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
