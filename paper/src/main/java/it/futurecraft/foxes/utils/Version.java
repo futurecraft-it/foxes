@@ -20,7 +20,7 @@ public enum Version {
         int i = version.indexOf("(MC: ");
         int j = version.indexOf(")");
 
-        String mcVersion = version.substring(i + 5, j);
+        String mcVersion = version.substring(i + 7, j);
         double versionDouble = Double.parseDouble(mcVersion);
 
         if (versionDouble == 21.1D) {
