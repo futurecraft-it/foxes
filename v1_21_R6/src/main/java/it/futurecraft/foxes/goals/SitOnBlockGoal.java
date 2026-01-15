@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import org.bukkit.entity.Mob;
 import org.jetbrains.annotations.NotNull;
 
 public class SitOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
@@ -58,9 +57,7 @@ public class SitOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
 
     @Override
     protected boolean isValidTarget(LevelReader level, BlockPos bp) {
-        if (!level.isEmptyBlock(bp.above())) return false;
-
         BlockState bs = level.getBlockState(bp);
-        return entity.comfortable(CraftBlockData.fromData(bs));
+        return level.isEmptyBlock(bp.above()) && entity.comfortable(CraftBlockData.fromData(bs));
     }
 }

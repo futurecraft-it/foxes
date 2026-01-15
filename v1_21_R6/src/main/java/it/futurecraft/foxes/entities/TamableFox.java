@@ -38,10 +38,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FurnaceBlock;
-import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.pathfinder.PathType;
@@ -153,7 +150,6 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
 
             Goal stalk = (Goal) ReflectionHelper.newInstance(Fox.class, "StalkPreyGoal", this);
             goalSelector.addGoal(5, stalk);
-            goalSelector.addGoal(5, new LieOnBlockGoal(this, 1.1d, 8));
             goalSelector.addGoal(6, new Fox.FoxPounceGoal());
 
             Goal seekShelter = (Goal) ReflectionHelper.newInstance(Fox.class, "SeekShelterGoal", this, new Argument<>(double.class, 1.25d));
@@ -165,7 +161,8 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
 
             Goal sleep = (Goal) ReflectionHelper.newInstance(Fox.class, "SleepGoal", this);
             goalSelector.addGoal(7, sleep);
-            goalSelector.addGoal(7, new SitOnBlockGoal(this, 0.8d, 10));
+            goalSelector.addGoal(7, new LieOnBlockGoal(this, 1.1d, 10));
+            // goalSelector.addGoal(7, new SitOnBlockGoal(this, 0.8d, 10)); -> nah
 
             Goal followParent = (Goal) ReflectionHelper.newInstance(Fox.class, "FoxFollowParentGoal", this, new Argument<>(Fox.class, this), new Argument<>(double.class, 1.25d));
             goalSelector.addGoal(8, followParent);
@@ -387,7 +384,7 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
         CraftBlockData cbd = (CraftBlockData) bd;
         BlockState bs = cbd.getState();
 
-        return bs.is(Blocks.FURNACE) ? bs.getValue(FurnaceBlock.LIT) :
+        return bs.is(Blocks.FURNACE) ? (Boolean) bs.getValue(AbstractFurnaceBlock.LIT) :
                 bs.is(BlockTags.BEDS, s -> s.getOptionalValue(BedBlock.PART).map(p -> p != BedPart.HEAD).orElse(true));
     }
 

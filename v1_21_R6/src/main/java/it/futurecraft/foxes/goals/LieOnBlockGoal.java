@@ -4,15 +4,11 @@ import it.futurecraft.foxes.entities.ComfortSeeker;
 import it.futurecraft.foxes.entities.Tamable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import org.bukkit.entity.Mob;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.EnumSet;
 
 public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
     private final ComfortSeeker entity;
@@ -21,14 +17,11 @@ public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
         super((PathfinderMob) entity, speed, range);
 
         this.entity = entity;
-
-        setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
     }
 
     @Override
     public boolean canUse() {
         Tamable t = (Tamable) entity;
-
         return t.tame() && !t.orderedToSit() && !t.lie() && super.canUse();
     }
 
@@ -70,6 +63,6 @@ public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
     @Override
     protected boolean isValidTarget(LevelReader level, BlockPos bp) {
         BlockState bs = level.getBlockState(bp);
-        return !level.isEmptyBlock(bp.above()) && entity.comfortable(CraftBlockData.fromData(bs));
+        return level.isEmptyBlock(bp.above()) && entity.comfortable(CraftBlockData.fromData(bs));
     }
 }
