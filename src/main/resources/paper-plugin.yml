@@ -1,7 +1,0 @@
-name: foxes
-version: '1.0'
-main: it.futurecraft.foxes.Foxes
-description: Just a plugin for tamable foxes.
-api-version: '1.21.10'
-bootstrapper: it.futurecraft.foxes.FoxesBootstrap
-loader: it.futurecraft.foxes.FoxesPluginLoader
