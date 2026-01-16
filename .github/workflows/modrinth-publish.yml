@@ -27,6 +27,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Publish
-        run: ./gradlew modrinth --no-configuration-cache
+        run: ./gradlew :paper:modrinth --no-configuration-cache
         env:
-          MODIRNTH_TOKEN: ${{ secrets.MODIRNTH_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
