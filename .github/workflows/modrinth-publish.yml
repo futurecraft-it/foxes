@@ -29,4 +29,4 @@ jobs:
       - name: Publish
         run: ./gradlew modrinth --no-configuration-cache
         env:
-          MODIRNTTH_ACCESS: ${{ secrets.MODIRNTTH_ACCESS }}
+          MODIRNTH_TOKEN: ${{ secrets.MODIRNTH_TOKEN }}
