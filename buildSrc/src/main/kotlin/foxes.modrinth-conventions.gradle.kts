@@ -11,6 +11,7 @@ modrinth {
     versionType.set("release")
 
     loaders.addAll("paper", "purpur")
+    gameVersions.addAll("1.21.10")
 
     uploadFile.set(tasks.shadowJar)
 }
