@@ -1,0 +1,32 @@
+name: modrinth-publish
+on:
+  release:
+    types: [ released, prereleased ]
+
+jobs:
+  publish:
+    name: Build and Publish
+
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Grant permissions
+        run: chmod +x gradlew
+
+      - name: Publish
+        run: ./gradlew modrinth --no-configuration-cache
+        env:
+          MODIRNTTH_ACCESS: ${{ secrets.MODIRNTTH_ACCESS }}
