@@ -1,6 +1,7 @@
-package it.futurecraft.foxes.goals;
+package it.futurecraft.foxes.v1_21_10.goals;
 
 import it.futurecraft.foxes.entities.Tamable;
+import it.futurecraft.foxes.goals.SpeedModifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.Optional;
 
-public class FollowOwnerGoal extends Goal implements SpeedModifier{
+public class FollowOwnerGoal extends Goal implements SpeedModifier {
     private final Mob entity;
     private final PathNavigation navigation;
 

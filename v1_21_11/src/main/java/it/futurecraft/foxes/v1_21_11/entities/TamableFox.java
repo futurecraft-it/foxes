@@ -1,14 +1,16 @@
-package it.futurecraft.foxes.entities;
+package it.futurecraft.foxes.v1_21_11.entities;
 
 
 import it.futurecraft.foxes.Foxes;
-import it.futurecraft.foxes.goals.FollowOwnerGoal;
-import it.futurecraft.foxes.goals.LieOnBlockGoal;
-import it.futurecraft.foxes.goals.SitWhenOrderedToGoal;
-import it.futurecraft.foxes.goals.TamablePanicGoal;
-import it.futurecraft.foxes.goals.target.NonTameRandomTargetGoal;
-import it.futurecraft.foxes.goals.target.OwnerHurtByTargetGoal;
-import it.futurecraft.foxes.goals.target.OwnerHurtTargetGoal;
+import it.futurecraft.foxes.entities.ComfortSeeker;
+import it.futurecraft.foxes.entities.Tamable;
+import it.futurecraft.foxes.v1_21_11.goals.FollowOwnerGoal;
+import it.futurecraft.foxes.v1_21_11.goals.LieOnBlockGoal;
+import it.futurecraft.foxes.v1_21_11.goals.SitWhenOrderedToGoal;
+import it.futurecraft.foxes.v1_21_11.goals.TamablePanicGoal;
+import it.futurecraft.foxes.v1_21_11.goals.target.NonTameRandomTargetGoal;
+import it.futurecraft.foxes.v1_21_11.goals.target.OwnerHurtByTargetGoal;
+import it.futurecraft.foxes.v1_21_11.goals.target.OwnerHurtTargetGoal;
 import it.futurecraft.foxes.utils.CustomPersistentDataType;
 import it.futurecraft.foxes.utils.reflection.ReflectionHelper;
 import it.futurecraft.foxes.utils.reflection.ReflectionHelper.Argument;

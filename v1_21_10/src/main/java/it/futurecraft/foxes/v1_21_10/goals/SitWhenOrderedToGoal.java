@@ -1,4 +1,4 @@
-package it.futurecraft.foxes.goals;
+package it.futurecraft.foxes.v1_21_10.goals;
 
 import it.futurecraft.foxes.entities.Tamable;
 import net.minecraft.world.entity.LivingEntity;

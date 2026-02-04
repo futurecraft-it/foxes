@@ -1,7 +1,8 @@
-package it.futurecraft.foxes.goals;
+package it.futurecraft.foxes.v1_21_11.goals;
 
 import it.futurecraft.foxes.entities.ComfortSeeker;
 import it.futurecraft.foxes.entities.Tamable;
+import it.futurecraft.foxes.goals.SpeedModifier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
@@ -10,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.jetbrains.annotations.NotNull;
 
-public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
+public class SitOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
     private final ComfortSeeker entity;
 
-    public LieOnBlockGoal(@NotNull ComfortSeeker entity, double speed, int range) {
+    public SitOnBlockGoal(@NotNull ComfortSeeker entity, double speed, int range) {
         super((PathfinderMob) entity, speed, range);
 
         this.entity = entity;
@@ -22,7 +23,8 @@ public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
     @Override
     public boolean canUse() {
         Tamable t = (Tamable) entity;
-        return t.tame() && !t.orderedToSit() && !t.lie() && super.canUse();
+
+        return t.tame() && !t.orderedToSit() && super.canUse();
     }
 
     @Override
@@ -30,7 +32,7 @@ public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
         super.stop();
 
         Tamable t = (Tamable) entity;
-        t.lie(false);
+        t.sit(false);
     }
 
     @Override
@@ -42,17 +44,11 @@ public class LieOnBlockGoal extends MoveToBlockGoal implements SpeedModifier {
     }
 
     @Override
-    protected int nextStartTick(PathfinderMob creature) {
-        return 40;
-    }
-
-    @Override
     public void tick() {
         super.tick();
 
         Tamable t = (Tamable) entity;
-        t.sit(false);
-        t.lie(isReachedTarget());
+        t.sit(isReachedTarget());
     }
 
     @Override

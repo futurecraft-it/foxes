@@ -1,6 +1,6 @@
 package it.futurecraft.foxes;
 
-import it.futurecraft.foxes.entities.TamableFox;
+import it.futurecraft.foxes.v1_21_11.entities.TamableFox;
 import it.futurecraft.foxes.utils.reflection.ReflectionHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.fox.Fox;

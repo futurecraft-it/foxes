@@ -1,6 +1,7 @@
-package it.futurecraft.foxes.goals;
+package it.futurecraft.foxes.v1_21_11.goals;
 
 import it.futurecraft.foxes.entities.Tamable;
+import it.futurecraft.foxes.goals.SpeedModifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.PathfinderMob;
