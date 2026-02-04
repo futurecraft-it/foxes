@@ -17,3 +17,4 @@ include("paper")
 include("api")
 
 include("v1_21_R6")
+include("v1_21_R7")

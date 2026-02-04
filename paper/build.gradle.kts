@@ -10,4 +10,5 @@ dependencies {
     implementation(project(":api"))
 
     implementation(project(":v1_21_R6"))
+    implementation(project(":v1_21_R7"))
 }

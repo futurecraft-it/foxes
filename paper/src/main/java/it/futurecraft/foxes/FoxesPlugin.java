@@ -25,7 +25,12 @@ public class FoxesPlugin extends JavaPlugin implements Listener {
             case Version.v1_21_R6:
                 foxes = new Foxes_1_21_R6_Impl();
                 break;
+            case Version.v1_21_R7:
+                foxes = new Foxes_1_21_R7_Impl();
+                break;
         }
+
+        getLogger().info(serverVersion.version);
 
         foxes.registerFox();
     }
