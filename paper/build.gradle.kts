@@ -2,6 +2,7 @@ plugins {
     id("foxes.build-conventions")
     id("foxes.common-conventions")
     id("foxes.modrinth-conventions")
+    id("foxes.hangar-conventions")
 }
 
 dependencies {
