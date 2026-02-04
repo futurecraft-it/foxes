@@ -2,12 +2,13 @@ package it.futurecraft.foxes;
 
 import it.futurecraft.foxes.events.PlayerInteractEntity;
 import it.futurecraft.foxes.utils.Version;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FoxesPlugin extends JavaPlugin implements Listener {
-    public static final int BSTATS_ID = 1;
+    public static final int BSTATS_ID = 29314;
 
     private Version serverVersion;
     private Foxes foxes;
@@ -22,21 +23,21 @@ public class FoxesPlugin extends JavaPlugin implements Listener {
             case Version.UNKNOWN:
                 Bukkit.getPluginManager().disablePlugin(this);
                 break;
-            case Version.v1_21_R6:
-                foxes = new Foxes_1_21_R6_Impl();
+            case Version.v1_21_10:
+                foxes = new Foxes_1_21_10_Impl();
                 break;
-            case Version.v1_21_R7:
-                foxes = new Foxes_1_21_R7_Impl();
+            case Version.v1_21_11:
+                foxes = new Foxes_1_21_11_Impl();
                 break;
         }
-
-        getLogger().info(serverVersion.version);
 
         foxes.registerFox();
     }
 
     @Override
     public void onEnable() {
+        Metrics metrics = new Metrics(this, BSTATS_ID);
+
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new PlayerInteractEntity(this), this);
     }

@@ -5,6 +5,8 @@ plugins {
 group = rootProject.group
 version = rootProject.version
 
+java.disableAutoTargetJvm()
+
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }

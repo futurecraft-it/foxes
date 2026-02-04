@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 
-public class Foxes_1_21_R7_Impl implements Foxes {
-    public Foxes_1_21_R7_Impl() {}
+public class Foxes_1_21_11_Impl implements Foxes {
+    public Foxes_1_21_11_Impl() {}
 
     @Override
     public void registerFox() {

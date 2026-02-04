@@ -24,6 +24,9 @@ tasks.shadowJar {
     filesMatching("META-INF/services/**") {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
+
+
+    relocate("org.bstats", project.group.toString())
 }
 
 tasks.withType(xyz.jpenilla.runtask.task.AbstractRun::class) {

@@ -7,8 +7,8 @@ import net.minecraft.world.entity.animal.Fox;
 
 import java.lang.reflect.Field;
 
-public class Foxes_1_21_R6_Impl implements Foxes {
-    public Foxes_1_21_R6_Impl() {}
+public class Foxes_1_21_10_Impl implements Foxes {
+    public Foxes_1_21_10_Impl() {}
 
     @Override
     public void registerFox() {
