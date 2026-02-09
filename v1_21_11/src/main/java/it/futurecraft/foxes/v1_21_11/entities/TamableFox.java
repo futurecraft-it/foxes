@@ -112,10 +112,10 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
             Field land = getClass().getSuperclass().getDeclaredField("cR");
             ReflectionHelper.set(land, this, new NonTameRandomTargetGoal<>(this, Animal.class, false, (e, w) -> e instanceof Chicken || e instanceof Rabbit));
 
-            Field turtle = getClass().getSuperclass().getDeclaredField("cW");
+            Field turtle = getClass().getSuperclass().getDeclaredField("cU");
             ReflectionHelper.set(turtle, this, new NonTameRandomTargetGoal<>(this, Turtle.class, false, Turtle.BABY_ON_LAND_SELECTOR));
 
-            Field fish = getClass().getSuperclass().getDeclaredField("cU");
+            Field fish = getClass().getSuperclass().getDeclaredField("cV");
             ReflectionHelper.set(fish, this, new NonTameRandomTargetGoal<>(this, AbstractFish.class, false, (e, w) -> e instanceof AbstractFish));
 
             Goal floatGoal = (Goal) ReflectionHelper.newInstance(Fox.class, "FoxFloatGoal", this);
