@@ -1,5 +1,5 @@
 group = "it.futurecraft.foxes"
-version = "1.2-SNAPSHOT"
+version = "2.0-SNAPSHOT"
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)

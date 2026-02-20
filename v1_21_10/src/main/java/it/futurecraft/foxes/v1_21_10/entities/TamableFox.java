@@ -24,16 +24,20 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.animal.Fox;
+import net.minecraft.world.entity.animal.PolarBear;
+import net.minecraft.world.entity.animal.Rabbit;
+import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.animal.wolf.Wolf;
-import net.minecraft.world.entity.decoration.ArmorStand;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -54,8 +58,8 @@ import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.event.CraftEventFactory;
+import org.bukkit.entity.*;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
@@ -398,14 +402,16 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
         } else {
             net.minecraft.world.entity.LivingEntity t = ((CraftLivingEntity) owner).getHandle();
             net.minecraft.world.entity.LivingEntity o = ((CraftLivingEntity) owner).getHandle();
-        return t instanceof Wolf wolf
-                ? !wolf.isTame() || wolf.getOwner() != o
-                : t instanceof TamableFox fox ?
-                ! fox.tame() || fox.ownedBy((Player) o)
-                :
-                !(t instanceof net.minecraft.world.entity.player.Player player && o instanceof net.minecraft.world.entity.player.Player player1 && !player1.canHarmPlayer(player))
-                && !(t instanceof AbstractHorse abstractHorse && abstractHorse.isTamed())
-                && !(t instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame());
+            return t instanceof Wolf wolf
+                    ? !wolf.isTame() || wolf.getOwner() != o
+                    : t instanceof TamableFox fox ?
+                    !fox.tame() || fox.ownedBy((Player) o)
+                    : t instanceof TamableSlime slime ?
+                    !slime.tame() || slime.ownedBy((Player) o)
+                    :
+                    !(t instanceof net.minecraft.world.entity.player.Player player && o instanceof net.minecraft.world.entity.player.Player player1 && !player1.canHarmPlayer(player))
+                            && !(t instanceof AbstractHorse abstractHorse && abstractHorse.isTamed())
+                            && !(t instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame());
         }
     }
 

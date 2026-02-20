@@ -407,14 +407,16 @@ public class TamableFox extends Fox implements Tamable, ComfortSeeker {
         } else {
             net.minecraft.world.entity.LivingEntity t = ((CraftLivingEntity) owner).getHandle();
             net.minecraft.world.entity.LivingEntity o = ((CraftLivingEntity) owner).getHandle();
-        return t instanceof Wolf wolf
-                ? !wolf.isTame() || wolf.getOwner() != o
-                : t instanceof TamableFox fox ?
-                ! fox.tame() || fox.ownedBy((Player) o)
-                :
-                !(t instanceof net.minecraft.world.entity.player.Player player && o instanceof net.minecraft.world.entity.player.Player player1 && !player1.canHarmPlayer(player))
-                && !(t instanceof AbstractHorse abstractHorse && abstractHorse.isTamed())
-                && !(t instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame());
+            return t instanceof Wolf wolf
+                    ? !wolf.isTame() || wolf.getOwner() != o
+                    : t instanceof TamableFox fox ?
+                        !fox.tame() || fox.ownedBy((Player) o)
+                    : t instanceof TamableSlime slime ?
+                        !slime.tame() || slime.ownedBy((Player) o)
+                    :
+                    !(t instanceof net.minecraft.world.entity.player.Player player && o instanceof net.minecraft.world.entity.player.Player player1 && !player1.canHarmPlayer(player))
+                            && !(t instanceof AbstractHorse abstractHorse && abstractHorse.isTamed())
+                            && !(t instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame());
         }
     }
 

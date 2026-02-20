@@ -32,6 +32,7 @@ public class FoxesPlugin extends JavaPlugin implements Listener {
         }
 
         foxes.registerFox();
+        foxes.registerSlime();
     }
 
     @Override

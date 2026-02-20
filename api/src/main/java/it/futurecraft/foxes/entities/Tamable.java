@@ -1,5 +1,6 @@
 package it.futurecraft.foxes.entities;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +13,10 @@ import java.util.Optional;
  * It implements what's in NMS' TamableMob class.
  */
 public interface Tamable {
+    NamespacedKey KEY_OWNER = new NamespacedKey("foxes", "owner");
+    NamespacedKey KEY_TAME = new NamespacedKey("foxes", "tame");
+    NamespacedKey KEY_SIT = new NamespacedKey("foxes", "sit");
+
     /**
      * The owner of this tamable.
      * @return The player, empty otherwise.

@@ -16,4 +16,6 @@ public interface Foxes {
     }
 
     void registerFox();
+
+    void registerSlime();
 }
