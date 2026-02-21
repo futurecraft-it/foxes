@@ -1,5 +1,5 @@
 name: foxes
-version: '2.0'
+version: '2.1'
 main: it.futurecraft.foxes.FoxesPlugin
 description: Just a plugin for tamable foxes.
 api-version: '1.21.10'
