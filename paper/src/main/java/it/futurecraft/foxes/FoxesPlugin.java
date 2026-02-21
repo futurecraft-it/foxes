@@ -4,7 +4,9 @@ import it.futurecraft.foxes.events.PlayerInteractEntity;
 import it.futurecraft.foxes.utils.Version;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class FoxesPlugin extends JavaPlugin implements Listener {
@@ -31,8 +33,8 @@ public class FoxesPlugin extends JavaPlugin implements Listener {
                 break;
         }
 
-        foxes.registerFox();
-        foxes.registerSlime();
+        foxes.register(EntityType.FOX, foxes.fox());
+        foxes.register(EntityType.SLIME, foxes.slime());
     }
 
     @Override
@@ -41,6 +43,8 @@ public class FoxesPlugin extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new PlayerInteractEntity(this), this);
+
+        getServer().getServicesManager().register(Foxes.class, foxes, this, ServicePriority.High);
     }
 
     public Version getServerVersion() {
