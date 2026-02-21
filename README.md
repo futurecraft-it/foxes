@@ -47,7 +47,8 @@ Your new cute friends are here! **foxes** is a plugin that allows players to tam
 ### <span id="new-friends-update"></span> [current] v2.0 - 🐾 **New Friends Update.** 
 The "_New Friends Update_" aims to add new tamable mobs to the game.
 - v2.0 - Added Slimes as a new tamable mob.
-- v2.1 - In development...
+- v2.1 - Refactoring for future public APIs.
+- v2.2 - In development: Tamable armadillos.
 
 ### <span id="more-mechanics-update"></span> [future] v3.0 - ⚙️ **More Mechanics Update.**
 The "_More Mechanics Update_" will add new mechanics to the plugin, such as new ways to interact with your pets and new features for them, as well as configurable options for the plugin.
